@@ -12,20 +12,45 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Compile: qmk compile -kb kyria -km justin0979
+ * Flash: qmk flash -kb kyria -km justin0979
  */
 #include QMK_KEYBOARD_H
 
 enum layers {
-    _QWERTY = 0,
+    _COLEMAK = 0,
     _WORKMAN,
+    _QWERTY,
     _LSIDE,
     _RSIDE,
-    _ADJUST
+    _ADJUST,
+    _MCR
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
- * Base Layer: WORKMAN
+ * Base Layer: COLEMAK
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |RAIS/ESC|   Q  |   W  |   F  |   P  |   G  |                              |   J  |   L  |   U  |   Y  | ;  : |  | \   |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * |Ctrl/BS |   A  |   R  |   S  |   T  |   D  |                              |   H  |   N  |   E  |   I  |   O  |  ' "   |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * | LShift |   Z  |   X  |   C  |   V  |   B  |LShift|LShift|  |LShift|LShift|   K  |   M  | ,  < | . >  | /  ? |  - _   |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ *                        | GUI  | Del  | Enter| Space| Esc  |  | Enter| Space| Tab  | Bksp | AltGr|
+ *                        |      |      | Alt  | Lower| Raise|  | Lower| Raise|      |      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
+    [_COLEMAK] = LAYOUT(
+      LT(_RSIDE, KC_ESC),      KC_Q,   KC_W,   KC_F, KC_P,    KC_G,                                            KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_PIPE,
+      MT(MOD_LCTL, KC_BSPC),   KC_A,   KC_R,   KC_S, KC_T,    KC_D,                                            KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
+      TG(_MCR),                KC_Z,   KC_X,   KC_C, KC_V,    KC_B,   KC_LSFT, KC_LSFT,     KC_LSFT, KC_LSFT,  KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
+                               KC_LGUI, KC_DEL, MT(MOD_LALT, KC_ENT), KC_LSFT, KC_BSPC,     LT(_LSIDE, KC_ENT), LT(_RSIDE, KC_SPC), KC_TAB,  KC_ESC, KC_RALT
+    ),
+/*
+ * Base Layer: WORKMAN, but the commented layout below is still QWERTY
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |RAIS/ESC|   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  | \   |
@@ -123,6 +148,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI, RGB_MOD,                                     _______, _______, _______, KC_F11,  KC_F12,  _______,
       _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD,_______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+    ),
+/*
+ * Minecraft Layer: Number keys, media, navigation
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |        |   1  |  2   |  3   |  4   |  5   |                              |  6   |  7   |  8   |  9   |  0   |        |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * |        | SHIFT|  A   |  W   |  D   |  E   |                              | Left | Down | Up   | Right|      |        |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * |        |      |      |  S   |  F   |  F5  |  ESC |      |  |      |      | MLeft| Mdown| MUp  |MRight|      |        |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ *                        |      |  Q   | LCTL |  SPC |  F5  |  |      |      |      |      |      |
+ *                        |      |      |      |      |      |  |      |      |      |      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
+    [_MCR] = LAYOUT(
+      _______, KC_1, 	  KC_2,    KC_3,    KC_4,    KC_5,                                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
+      _______, KC_LSFT, KC_A,    KC_W,    KC_D,    KC_E,                                     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______,
+      _______, _______, _______, KC_S,    KC_F,   KC_F5,  KC_ESC, _______, _______, _______, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, _______, _______,
+                                 _______, KC_Q, KC_LCTL,  KC_SPC,   KC_F5, _______, _______, _______, _______, _______
     ),
 // /*
 //  * Layer template
