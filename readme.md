@@ -7,7 +7,9 @@
 [![GitHub contributors](https://img.shields.io/github/contributors/qmk/qmk_firmware.svg)](https://github.com/qmk/qmk_firmware/pulse/monthly)
 [![GitHub forks](https://img.shields.io/github/forks/qmk/qmk_firmware.svg?style=social&label=Fork)](https://github.com/qmk/qmk_firmware/)
 
-This repo has crkbd and kyria keymaps ONLY.
+This repo has [crkbd](https://github.com/justin0979/qmk_firmware/blob/main/keyboards/crkbd/keymaps/justin0979/keymap.c)
+and [kyria](https://github.com/justin0979/qmk_firmware/blob/main/keyboards/kyria/keymaps/justin0979/keymap.c)
+keymaps ONLY.
 
 This is a keyboard firmware based on the [tmk_keyboard firmware](https://github.com/tmk/tmk_keyboard) with some useful features for Atmel AVR and ARM controllers, and more specifically, the [OLKB product line](https://olkb.com), the [ErgoDox EZ](https://ergodox-ez.com) keyboard, and the [Clueboard product line](https://clueboard.co).
 
