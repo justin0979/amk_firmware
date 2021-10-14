@@ -37,8 +37,9 @@ extern uint8_t is_master;
 #define _COLEMAK 0     // line 63
 #define _RSIDE 2       // line 96
 #define _LSIDE 3       // line 108
-#define _THIRD 4      // line 120
-#define _MCR 5         // line 151
+#define _LLS 4
+#define _THIRD 5      // line 120
+#define _MCR 6         // line 151
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
@@ -89,21 +90,33 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LCTL, KC_QUOT, KC_TILD, KC_RALT, KC_TAB,  KC_ESC,                      KC_BSLS,KC_MINUS,  KC_EQL, KC_LBRC, KC_RBRC, XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT, KC_QUOT , KC_GRV, KC_LCTL, KC_DEL, C(A(KC_V)),                      XXXXXXX, XXXXXXX, XXXXXXX, KC_DOT, XXXXXXX, XXXXXXX,\
+      KC_LSFT, KC_QUOT , KC_GRV, KC_LCTL, KC_DEL, C(A(KC_V)),                    C(KC_T), C(KC_W), XXXXXXX, KC_DOT, XXXXXXX, XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          THIRD, KC_TRNS,  KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS \
+                                          KC_TRNS, MO(_THIRD),  KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS \
                                       //`--------------------------'  `--------------------------'
     ),
 
   [_LSIDE] = LAYOUT_split_3x6_3( \
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_ESC,C(S(KC_E)),C(S(KC_P)), KC_PGDN,  C(S(KC_I)), KC_M,                    C(S(KC_6)),C(KC_MINUS),C(KC_PLUS),C(KC_Y),  KC_RPRN, KC_BSPC,\
+     KC_ESC,  C(S(KC_E)),C(S(KC_P)), KC_PGDN, C(S(KC_I)), KC_M,                 C(S(KC_6)),C(KC_MINUS), C(KC_PLUS),C(KC_Y),  KC_RPRN,    KC_BSPC,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL, XXXXXXX, XXXXXXX, KC_DOWN,LCA(KC_T), C(S(KC_D)),                    KC_LEFT,   KC_DOWN,    KC_UP,     KC_RIGHT, KC_PIPE,  KC_GRV,\
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT, XXXXXXX, XXXXXXX, C(KC_C), C(KC_E),C(S(KC_J)),                      KC_HOME, KC_END, KC_LBRC, KC_RBRC, KC_BSLS, KC_TILD,\
+     KC_LCTL, MO(_LLS),  C(KC_PLUS), KC_DOWN, LCA(KC_T),  C(S(KC_D)),           KC_LEFT,   KC_DOWN,     KC_UP,     KC_RIGHT, C(S(KC_0)), KC_GRV,\
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+-   -------+--------+--------+--------|
+     KC_LSFT, C(KC_Z),   C(KC_Y),    C(KC_C), C(KC_E),    C(S(KC_J)),           KC_HOME,   KC_END,      KC_LBRC,   KC_RBRC,  KC_BSLS,    KC_TILD,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_TRNS,   RSIDE,  KC_SPC,     KC_RGUI,   _THIRD, THIRD \
+                                          KC_TRNS,   KC_TRNS,  KC_SPC,     KC_RGUI,   MO(_THIRD),XXXXXXX \
+                                      //`--------------------------'  `--------------------------'
+  ),
+
+  [_LLS] = LAYOUT_split_3x6_3( \
+  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+      XXXXXXX, XXXXXXX, XXXXXXX, KC_PGUP,   KC_F5,   KC_H,                        KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,\
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      XXXXXXX, XXXXXXX, C(KC_MINUS), KC_UP, XXXXXXX, XXXXXXX,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RIGHT, XXXXXXX, XXXXXXX,\
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      XXXXXXX, XXXXXXX, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
+  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                          KC_LGUI,   RSIDE,  KC_SPC,     KC_ENT,   LSIDE, KC_RALT \
                                       //`--------------------------'  `--------------------------'
   ),
 
