@@ -35,21 +35,17 @@ extern uint8_t is_master;
 // entirely and just use numbers.
 #define _QWERTY 1      // line 70
 #define _COLEMAK 0     // line 63
-#define _WORKMAN 2     // line 83
-#define _RSIDE 3       // line 96
-#define _LSIDE 4       // line 108
-#define _ADJUST 5      // line 120
-#define _COLEMAK_DH 6  // line 57
-#define _MCR 7         // line 151
+#define _RSIDE 2       // line 96
+#define _LSIDE 3       // line 108
+#define _THIRD 4      // line 120
+#define _MCR 5         // line 151
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
   COLEMAK,
-  COLEMAK_DH,
-  WORKMAN, 
   RSIDE,
   LSIDE,
-  ADJUST,
+  THIRD,
   BACKLIT,
   RGBRST,
   MCR
@@ -69,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
      TO(_MCR),    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_K,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          LSIDE, KC_LSFT,  KC_BSPC,     KC_ENT,  KC_SPC,  RSIDE \
+                             KC_LSFT, LSIDE,  MT(MOD_LSFT,KC_BSPC),    KC_SPC,  LT(_RSIDE,KC_ENT),  RSIDE \
                                       //`--------------------------'  `--------------------------'
 
   ),
@@ -87,19 +83,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   ),
 
-  [_WORKMAN] = LAYOUT_split_3x6_3( \
-  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_LCTL,    KC_Q,    KC_D,    KC_R,    KC_W,    KC_B,                         KC_J,    KC_F,    KC_U,    KC_P, KC_SCLN,  KC_BSPC,\
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_QUOT,    KC_A,    KC_S,    KC_H,    KC_T,    KC_G,                         KC_Y,    KC_N,    KC_E,    KC_O,    KC_I, KC_ENT,\
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-       QWERTY,    KC_Z,    KC_X,    KC_M,    KC_C,    KC_V,                         KC_K,    KC_L, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,\
-  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          LSIDE, KC_LSFT,  KC_BSPC,     KC_ENT,  KC_SPC,  RSIDE \
-                                      //`--------------------------'  `--------------------------'
-
-  ),
-
   [_RSIDE] = LAYOUT_split_3x6_3( \
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC,\
@@ -108,23 +91,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT, KC_QUOT , KC_GRV, KC_LCTL, KC_DEL, C(A(KC_V)),                      XXXXXXX, XXXXXXX, XXXXXXX, KC_DOT, XXXXXXX, XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          ADJUST, KC_TRNS,  KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS \
+                                          THIRD, KC_TRNS,  KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS \
                                       //`--------------------------'  `--------------------------'
     ),
 
   [_LSIDE] = LAYOUT_split_3x6_3( \
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_ESC, KC_EXLM,   KC_AT, KC_HASH,  C(KC_W), C(KC_B),                    C(S(KC_6)),C(KC_MINUS),C(KC_PLUS),C(KC_Y),  KC_RPRN, KC_BSPC,\
+       KC_ESC,C(S(KC_E)),C(S(KC_P)), KC_PGDN,  C(S(KC_I)), KC_M,                    C(S(KC_6)),C(KC_MINUS),C(KC_PLUS),C(KC_Y),  KC_RPRN, KC_BSPC,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX,LCA(KC_T), XXXXXXX,                    KC_LEFT,   KC_DOWN,    KC_UP,     KC_RIGHT, KC_PIPE,  KC_GRV,\
+      KC_LCTL, XXXXXXX, XXXXXXX, KC_DOWN,LCA(KC_T), C(S(KC_D)),                    KC_LEFT,   KC_DOWN,    KC_UP,     KC_RIGHT, KC_PIPE,  KC_GRV,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT, XXXXXXX, XXXXXXX, C(KC_C), C(KC_V),C(KC_B),                      KC_HOME, KC_END, KC_LBRC, KC_RBRC, KC_BSLS, KC_TILD,\
+      KC_LSFT, XXXXXXX, XXXXXXX, C(KC_C), C(KC_E),C(S(KC_J)),                      KC_HOME, KC_END, KC_LBRC, KC_RBRC, KC_BSLS, KC_TILD,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_TRNS,   RSIDE,  KC_SPC,     KC_F11,   KC_RALT, ADJUST \
+                                          KC_TRNS,   RSIDE,  KC_SPC,     KC_RGUI,   _THIRD, THIRD \
                                       //`--------------------------'  `--------------------------'
   ),
 
-  [_ADJUST] = LAYOUT_split_3x6_3( \
+  [_THIRD] = LAYOUT_split_3x6_3( \
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
         KC_F1,  KC_F2,    KC_F3,   KC_F4,   KC_F5,   KC_F6,                        KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -134,19 +117,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LGUI,   RSIDE,  KC_SPC,     KC_ENT,   LSIDE, KC_RALT \
                                       //`--------------------------'  `--------------------------'
-  ),
-
-  [_COLEMAK_DH] = LAYOUT_split_3x6_3( \
-  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_LCTL,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                         KC_J,    KC_L,    KC_U,    KC_Y, KC_SCLN,  KC_BSPC,\
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_QUOT,    KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                         KC_M,    KC_N,    KC_E,    KC_I,    KC_O, KC_ENT,\
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-       QWERTY,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,\
-  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          LSIDE, KC_LSFT,  KC_BSPC,     KC_ENT,  KC_SPC,  RSIDE \
-                                      //`--------------------------'  `--------------------------'
-
   ),
 
   [_MCR] = LAYOUT_split_3x6_3( \
@@ -170,7 +140,7 @@ void persistent_default_layer_set(uint16_t default_layer) {
   default_layer_set(default_layer);
 }
 
-// Setting ADJUST layer RGB back to default
+// Setting THIRD layer RGB back to default
 void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
   if (IS_LAYER_ON(layer1) && IS_LAYER_ON(layer2)) {
     layer_on(layer3);
@@ -246,11 +216,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 
   switch (keycode) {
-    case WORKMAN:
-      if (record->event.pressed) {
-        persistent_default_layer_set(1UL<<_WORKMAN);
-      }
-      return false;
     case QWERTY:
       if (record->event.pressed) {
         layer_on(_QWERTY);
@@ -261,26 +226,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case RSIDE:
       if (record->event.pressed) {
         layer_on(_RSIDE);
-        update_tri_layer_RGB(_RSIDE, _LSIDE, _ADJUST);
+        update_tri_layer_RGB(_RSIDE, _LSIDE, _THIRD);
       } else {
         layer_off(_RSIDE);
-        update_tri_layer_RGB(_RSIDE, _LSIDE, _ADJUST);
+        update_tri_layer_RGB(_RSIDE, _LSIDE, _THIRD);
       }
       return false;
     case LSIDE:
       if (record->event.pressed) {
         layer_on(_LSIDE);
-        update_tri_layer_RGB(_RSIDE, _LSIDE, _ADJUST);
+        update_tri_layer_RGB(_RSIDE, _LSIDE, _THIRD);
       } else {
         layer_off(_LSIDE);
-        update_tri_layer_RGB(_RSIDE, _LSIDE, _ADJUST);
+        update_tri_layer_RGB(_RSIDE, _LSIDE, _THIRD);
       }
       return false;
-    case ADJUST:
+    case THIRD:
         if (record->event.pressed) {
-          layer_on(_ADJUST);
+          layer_on(_THIRD);
         } else {
-          layer_off(_ADJUST);
+          layer_off(_THIRD);
         }
         return false;
     case RGB_MOD:
