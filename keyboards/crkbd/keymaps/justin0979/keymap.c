@@ -39,7 +39,8 @@ extern uint8_t is_master;
 #define _LSIDE 3       // line 108
 #define _LLS 4
 #define _THIRD 5      // line 120
-#define _MCR 6         // line 151
+#define _MCR 6         // line 136
+#define _NP 7         // line 149
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
@@ -49,7 +50,8 @@ enum custom_keycodes {
   THIRD,
   BACKLIT,
   RGBRST,
-  MCR
+  MCR,
+  NP
 };
 
 enum macro_keycodes {
@@ -66,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
      TO(_MCR),    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_K,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                             A(KC_LEFT), LSIDE,  MT(MOD_LSFT,KC_BSPC),    KC_SPC,  LT(_RSIDE,KC_ENT),  KC_F11 \
+                             A(KC_LEFT), LSIDE,  MT(MOD_LSFT,KC_BSPC),    KC_SPC,  LT(_RSIDE,KC_ENT),  TO(_NP) \
                                       //`--------------------------'  `--------------------------'
 
   ),
@@ -144,6 +146,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       //`--------------------------'  `--------------------------'
 
   ),
+
+  [_NP] = LAYOUT_split_3x6_3( \
+  //,--------------------------------------------------------.                    ,-----------------------------------------------------.
+      KC_ESC,      KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_R,   KC_KP_7,  KC_KP_8,  KC_KP_9, KC_SCLN, KC_BSPC,\
+  //|--------+-----------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+     TO(_COLEMAK), KC_A, KC_LEFT,    KC_UP,  KC_RIGHT, KC_E,                         KC_M,   KC_KP_4,  KC_KP_5,  KC_KP_6, KC_KP_0, KC_ENT,\
+  //|--------+-----------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+     TO(_COLEMAK), KC_Z,    KC_D,   KC_DOWN,  KC_F,    KC_V,                         KC_E,   KC_KP_1,  KC_KP_2,  KC_KP_3, KC_SLSH, KC_RSFT,\
+  //|--------+-----------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                          KC_LCTL, KC_SPC,  KC_F5,     KC_ENT,  KC_SPC,  TO(_COLEMAK) \
+                                      //`--------------------------'  `--------------------------'
+     
+  )
 };
 
 int RGB_current_mode;
