@@ -90,9 +90,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL, KC_QUOT, KC_TILD, KC_RALT, KC_TAB,  KC_ESC,                      KC_BSLS,KC_MINUS,  KC_EQL, KC_LBRC, KC_RBRC, XXXXXXX,\
+      KC_LCTL, KC_QUOT, KC_TILD, KC_RALT, KC_TAB,  KC_ESC,                      KC_BSLS,KC_MINUS,  KC_EQL, KC_LBRC, KC_RBRC, KC_TRNS,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT, C(KC_Z) , KC_GRV, C(KC_C), KC_DEL, C(A(KC_V)),                    C(KC_T), C(KC_W), XXXXXXX, KC_DOT, XXXXXXX, XXXXXXX,\
+      KC_LSFT, C(KC_Z) , KC_GRV, C(KC_C), KC_DEL, C(A(KC_V)),                    C(KC_T), C(KC_W), KC_TRNS, KC_DOT, KC_TRNS, KC_TRNS,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_TRNS, MO(_THIRD),  KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS \
                                       //`--------------------------'  `--------------------------'
