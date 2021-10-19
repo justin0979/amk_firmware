@@ -149,13 +149,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NP] = LAYOUT_split_3x6_3( \
   //,--------------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_ESC,      KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_R,   KC_KP_7,  KC_KP_8,  KC_KP_9, KC_SCLN, KC_BSPC,\
+      KC_ESC,      KC_Q,    KC_2,    KC_F,    KC_P,     KC_5,                       KC_R,   KC_KP_7,  KC_KP_8,  KC_KP_9, KC_KP_0, KC_BSPC,\
   //|--------+-----------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     TO(_COLEMAK), KC_A, KC_LEFT,    KC_UP,  KC_RIGHT, KC_E,                         KC_M,   KC_KP_4,  KC_KP_5,  KC_KP_6, KC_KP_0, KC_ENT,\
+     KC_BSPC  ,    KC_A,    KC_LEFT, KC_UP,   KC_RIGHT, KC_E,                       KC_M,   KC_KP_4,  KC_KP_5,  KC_KP_6, KC_KP_0, KC_ENT,\
   //|--------+-----------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     TO(_COLEMAK), KC_Z,    KC_D,   KC_DOWN,  KC_F,    KC_V,                         KC_E,   KC_KP_1,  KC_KP_2,  KC_KP_3, KC_SLSH, KC_RSFT,\
+     TO(_COLEMAK), KC_Z,    KC_D,    KC_DOWN, KC_F,     KC_V,                       KC_E,   KC_KP_1,  KC_KP_2,  KC_KP_3, KC_SLSH, KC_RSFT,\
   //|--------+-----------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LCTL, KC_SPC,  KC_F5,     KC_ENT,  KC_SPC,  TO(_COLEMAK) \
+                                          KC_LCTL, KC_SPC,  KC_F5,     KC_C,  KC_T,  TO(_COLEMAK) \
                                       //`--------------------------'  `--------------------------'
      
   )
