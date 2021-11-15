@@ -42,6 +42,7 @@ extern uint8_t is_master;
 #define _MCR 6         // line 136
 #define _MCRR 7
 #define _NP 8         // line 149
+#define _DB 9         // line 180
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
@@ -53,7 +54,8 @@ enum custom_keycodes {
   RGBRST,
   MCR,
   MCRR,
-  NP
+  NP,
+  DB
 };
 
 enum macro_keycodes {
@@ -130,7 +132,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
      TO(_MCR), RGB_HUI, C(KC_TAB), KC_LCTL, KC_TAB, XXXXXXX,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RIGHT, XXXXXXX, XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
+      TO(_DB), RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LGUI,   RSIDE,  KC_SPC,     KC_ENT,   LSIDE, KC_RALT \
                                       //`--------------------------'  `--------------------------'
@@ -173,7 +175,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                           KC_LCTL, KC_SPC,  KC_F5,     KC_E,  KC_N,  TO(_COLEMAK) \
                                       //`--------------------------'  `--------------------------'
      
+  ),
+
+  [_DB] = LAYOUT_split_3x6_3( \
+  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+      KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_Q,                         KC_J,    KC_L,    KC_U,    KC_Y, KC_SCLN,  KC_RALT,\
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      KC_TAB,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                         KC_H,    KC_N,    KC_E,    KC_I,    KC_O, KC_ENT,\
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      KC_SPC,   KC_A,    KC_R,    KC_H,    KC_I,    KC_T,                         KC_K,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_LCTL,\
+  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                        TO(_COLEMAK), KC_LALT, KC_LSFT,   KC_SPC,  MO(_RSIDE),  TO(_NP) \
+                                      //`--------------------------'  `--------------------------'
+
   )
+
 };
 
 int RGB_current_mode;
